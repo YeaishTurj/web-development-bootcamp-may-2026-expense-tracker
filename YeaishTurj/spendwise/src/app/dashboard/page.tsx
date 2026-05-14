@@ -3,6 +3,15 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { DashboardClient } from "@/components/dashboard/dashboard-client";
 
+type Expense = {
+  id: string;
+  title: string;
+  amount: number;
+  category: string;
+  type: "income" | "expense";
+  createdAt: Date;
+};
+
 export default async function Dashboard() {
   const supabase = await createClient();
 
@@ -12,7 +21,7 @@ export default async function Dashboard() {
     redirect("/login");
   }
 
-  const expenses = await prisma.expense.findMany({
+  const expenses: Expense[] = await prisma.expense.findMany({
     where: {
       userId: data.user.id,
     },
