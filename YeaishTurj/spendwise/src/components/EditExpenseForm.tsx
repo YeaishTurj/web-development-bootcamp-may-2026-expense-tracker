@@ -60,7 +60,7 @@ export default function EditExpenseForm({
         <input
           type="number"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => setAmount(Number(e.target.value))}
           className="border p-2 w-full rounded mt-1"
           placeholder="0"
         />
