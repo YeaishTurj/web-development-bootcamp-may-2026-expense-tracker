@@ -105,3 +105,4 @@ export default function EditExpenseForm({
     </div>
   );
 }
+// TypeScript fix applied
