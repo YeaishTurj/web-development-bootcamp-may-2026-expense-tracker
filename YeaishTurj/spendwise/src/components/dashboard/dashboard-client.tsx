@@ -347,7 +347,18 @@ export function DashboardClient({
     });
   };
 
-  const chartCells = ["#10b981", "#3b82f6", "#ef4444", "#f59e0b"];
+  // Resolve chart colors from CSS variables so theme adjustments stay consistent.
+  const resolveVar = (name: string, fallback: string) =>
+    (typeof window !== "undefined" &&
+      getComputedStyle(document.documentElement).getPropertyValue(name)) ||
+    fallback;
+
+  const chartCells = [
+    resolveVar("--chart-1", "#10b981") || "#10b981",
+    resolveVar("--chart-2", "#3b82f6") || "#3b82f6",
+    resolveVar("--chart-3", "#ef4444") || "#ef4444",
+    resolveVar("--chart-4", "#f59e0b") || "#f59e0b",
+  ].map((c) => c.trim());
 
   return (
     <div className="space-y-8">
@@ -635,7 +646,7 @@ export function DashboardClient({
                   <Bar
                     dataKey="amount"
                     radius={[10, 10, 0, 0]}
-                    fill="#3b82f6"
+                    fill={chartCells[1]}
                   />
                 </BarChart>
               </ResponsiveContainer>

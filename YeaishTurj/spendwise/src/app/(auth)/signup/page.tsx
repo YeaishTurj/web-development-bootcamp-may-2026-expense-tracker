@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import AnimatedPrimaryButton from "@/components/ui/animated-primary-button";
 import { toast } from "sonner";
 import {
   Card,
@@ -69,44 +70,44 @@ export default function SignupPage() {
                 </p>
 
                 <div className="flex items-center gap-2">
-                  <Button onClick={() => router.push("/login")}>
+                  <Button onClick={() => router.push("/login")} variant="ghost">
                     Go to login
                   </Button>
                 </div>
               </div>
             ) : (
               <>
-            <div className="space-y-2">
-              <label className="text-sm font-semibold text-foreground">
-                Email
-              </label>
-              <input
-                className="h-12 w-full rounded-full border border-border/70 bg-background px-4 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-2 focus:ring-ring/20"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-foreground">
+                    Email
+                  </label>
+                  <input
+                    className="h-12 w-full rounded-full border border-border/70 bg-background px-4 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-2 focus:ring-ring/20"
+                    placeholder="Email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
 
-            <div className="space-y-2">
-              <label className="text-sm font-semibold text-foreground">
-                Password
-              </label>
-              <input
-                className="h-12 w-full rounded-full border border-border/70 bg-background px-4 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-2 focus:ring-ring/20"
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-foreground">
+                    Password
+                  </label>
+                  <input
+                    className="h-12 w-full rounded-full border border-border/70 bg-background px-4 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-2 focus:ring-ring/20"
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
 
-                <Button
+                <AnimatedPrimaryButton
                   className="w-full rounded-full"
                   onClick={handleSignup}
                   disabled={loading}
                 >
                   {loading ? "Creating account..." : "Create account"}
                   <ArrowRight className="size-4" />
-                </Button>
+                </AnimatedPrimaryButton>
 
                 <p className="text-sm text-muted-foreground">
                   Already have an account?{" "}
