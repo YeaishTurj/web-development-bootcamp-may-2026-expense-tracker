@@ -8,6 +8,7 @@ export async function addExpense(data: {
   amount: number;
   category: string;
   type: "income" | "expense";
+  currency?: string;
 }) {
   const supabase = await createClient();
   const { data: userData } = await supabase.auth.getUser();
@@ -19,6 +20,7 @@ export async function addExpense(data: {
   return await prisma.expense.create({
     data: {
       ...data,
+      category: data.category?.trim().toLowerCase(),
       userId: userData.user.id,
     },
   });
@@ -44,6 +46,7 @@ export async function updateExpense(
     amount?: number;
     category?: string;
     type?: "income" | "expense";
+    currency?: string;
   },
 ) {
   const supabase = await createClient();
@@ -55,6 +58,9 @@ export async function updateExpense(
 
   return await prisma.expense.update({
     where: { id },
-    data,
+    data: {
+      ...data,
+      ...(data.category ? { category: data.category.trim().toLowerCase() } : {}),
+    },
   });
 }

@@ -12,7 +12,20 @@ model Expense {
   amount    Float
   category  String
   type      String   // "income" | "expense"
+  currency  String   @default("BDT")
   recurring Boolean  @default(false)
+
+  userId    String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Budget {
+  id        String   @id @default(cuid())
+
+  amount    Float
+  currency  String   @default("BDT")
 
   userId    String
 

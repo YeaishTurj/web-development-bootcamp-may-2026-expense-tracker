@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import { updateExpense } from "@/actions/expense";
+import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
+import { toast } from "sonner";
+import { CURRENCIES } from "@/lib/currency";
 
 interface EditExpenseFormProps {
   expense: {
@@ -11,6 +14,7 @@ interface EditExpenseFormProps {
     amount: number;
     category: string;
     type: string;
+    currency?: string;
   };
   onSave?: () => void;
 }
@@ -23,83 +27,100 @@ export default function EditExpenseForm({
   const [amount, setAmount] = useState(expense.amount);
   const [category, setCategory] = useState(expense.category);
   const [type, setType] = useState(expense.type);
+  const [currency, setCurrency] = useState(expense.currency || "BDT");
   const [loading, setLoading] = useState(false);
 
   const save = async () => {
     setLoading(true);
     try {
+      const normalizedCategory = category.trim().toLowerCase();
+
       await updateExpense(expense.id, {
         title,
         amount: Number(amount),
-        category,
+        category: normalizedCategory,
         type: type as "income" | "expense",
+        currency,
       });
 
       window.location.reload();
     } catch (error) {
-      alert("Failed to update expense");
+      toast.error("Update failed", {
+        description: "Failed to update expense",
+      });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="space-y-4">
-      <div>
-        <label className="text-sm font-medium">Title</label>
+    <div className="space-y-4 pt-1">
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-foreground">Title</label>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="border p-2 w-full rounded mt-1"
+          className="h-10 w-full rounded-xl border border-border/70 bg-background px-3 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-2 focus:ring-ring/20"
           placeholder="Expense name"
         />
       </div>
 
-      <div>
-        <label className="text-sm font-medium">Amount</label>
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-foreground">Amount</label>
         <input
           type="number"
           value={amount}
           onChange={(e) => setAmount(Number(e.target.value))}
-          className="border p-2 w-full rounded mt-1"
+          className="h-10 w-full rounded-xl border border-border/70 bg-background px-3 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-2 focus:ring-ring/20"
           placeholder="0"
         />
       </div>
 
-      <div>
-        <label className="text-sm font-medium">Category</label>
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-foreground">Category</label>
         <input
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="border p-2 w-full rounded mt-1"
+          className="h-10 w-full rounded-xl border border-border/70 bg-background px-3 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-2 focus:ring-ring/20"
           placeholder="e.g. Food"
         />
       </div>
 
-      <div>
-        <label className="text-sm font-medium">Type</label>
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-foreground">Type</label>
         <select
           value={type}
           onChange={(e) => setType(e.target.value)}
-          className="border p-2 w-full rounded mt-1"
+          className="h-10 w-full rounded-xl border border-border/70 bg-background px-3 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-2 focus:ring-ring/20"
         >
           <option value="expense">Expense</option>
           <option value="income">Income</option>
         </select>
       </div>
 
-      <div className="flex gap-2">
-        <button
-          onClick={save}
-          disabled={loading}
-          className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-600 disabled:opacity-50"
+      <div className="space-y-2">
+        <label className="text-sm font-medium text-foreground">Currency</label>
+        <select
+          value={currency}
+          onChange={(e) => setCurrency(e.target.value)}
+          className="h-10 w-full rounded-xl border border-border/70 bg-background px-3 text-sm shadow-sm outline-none transition focus:border-ring focus:ring-2 focus:ring-ring/20"
         >
+          {CURRENCIES.map((curr) => (
+            <option key={curr.code} value={curr.code}>
+              {curr.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="flex gap-2 pt-2">
+        <Button onClick={save} disabled={loading} className="w-full">
           {loading ? "Saving..." : "Save"}
-        </button>
+        </Button>
         <DialogClose asChild>
-          <button className="bg-gray-300 text-black p-2 w-full rounded hover:bg-gray-400">
+          <Button variant="outline" className="w-full">
             Cancel
-          </button>
+          </Button>
         </DialogClose>
       </div>
     </div>
