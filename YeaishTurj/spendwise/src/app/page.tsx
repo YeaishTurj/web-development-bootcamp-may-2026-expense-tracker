@@ -16,6 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/formatCurrency";
+import { createClient } from "@/lib/supabase/server";
 
 const highlights = [
   {
@@ -35,7 +36,10 @@ const highlights = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getUser();
+  const isLoggedIn = !!data.user;
   return (
     <div className="space-y-14 lg:space-y-20">
       <section className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
@@ -56,9 +60,11 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button size="lg" asChild className="rounded-full px-6 sm:px-7">
-              <Link href="/signup">Create Free Account</Link>
-            </Button>
+            {!isLoggedIn && (
+              <Button size="lg" asChild className="rounded-full px-6 sm:px-7">
+                <Link href="/signup">Create Free Account</Link>
+              </Button>
+            )}
             <Button
               variant="outline"
               size="lg"
