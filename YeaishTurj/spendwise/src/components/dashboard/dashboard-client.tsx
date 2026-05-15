@@ -353,7 +353,7 @@ export function DashboardClient({
     <div className="space-y-8">
       <section className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
         <Card className="border-border/70 bg-background/90 shadow-sm backdrop-blur">
-          <CardContent className="flex flex-col gap-6 p-6 sm:p-8">
+          <CardContent className="flex flex-col gap-4 p-4 sm:gap-6 sm:p-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div className="space-y-2">
                 <div className="flex items-center justify-between gap-3">
@@ -365,10 +365,10 @@ export function DashboardClient({
                 <p className="text-sm font-medium uppercase tracking-[0.24em] text-muted-foreground">
                   Dashboard
                 </p>
-                <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
                   A calmer view of your money.
                 </h1>
-                <p className="max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
+                <p className="max-w-2xl text-xs leading-5 text-muted-foreground sm:text-sm sm:leading-6">
                   Balance, income, spending, and recent activity are surfaced in
                   a cleaner layout so the app feels ready to use and present.
                 </p>
@@ -394,7 +394,7 @@ export function DashboardClient({
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid gap-2 sm:gap-3 grid-cols-1 sm:grid-cols-3">
               {[
                 {
                   label: "Balance",
@@ -417,21 +417,21 @@ export function DashboardClient({
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-2xl border border-border/70 bg-muted/35 p-4 shadow-sm"
+                  className="rounded-xl sm:rounded-2xl border border-border/70 bg-muted/35 p-3 sm:p-4 shadow-sm"
                 >
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start justify-between gap-2 sm:gap-4">
                     <div>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs sm:text-sm text-muted-foreground">
                         {item.label}
                       </p>
-                      <p className="mt-2 text-2xl font-semibold tracking-tight">
+                      <p className="mt-1 sm:mt-2 truncate text-lg sm:text-2xl font-semibold tracking-tight">
                         {formatDisplayAmount(item.value)}
                       </p>
                     </div>
                     <span
-                      className={`flex size-10 items-center justify-center rounded-2xl ring-1 ${item.tone}`}
+                      className={`flex flex-shrink-0 size-8 sm:size-10 items-center justify-center rounded-xl sm:rounded-2xl ring-1 ${item.tone}`}
                     >
-                      <item.icon className="size-4" />
+                      <item.icon className="size-3 sm:size-4" />
                     </span>
                   </div>
                 </div>
@@ -439,13 +439,13 @@ export function DashboardClient({
             </div>
 
             <Card className="border-border/70 bg-background/90 shadow-sm">
-              <CardContent className="space-y-4 p-6">
+              <CardContent className="space-y-3 sm:space-y-4 p-4 sm:p-6">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-sm text-muted-foreground">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-xs sm:text-sm text-muted-foreground">
                       Monthly Budget
                     </p>
-                    <h2 className="text-2xl font-bold">
+                    <h2 className="text-xl sm:text-2xl font-bold truncate">
                       {formatDisplayAmount(displayBudgetAmount)}
                     </h2>
                   </div>
@@ -645,28 +645,28 @@ export function DashboardClient({
       </section>
 
       <section className="space-y-4">
-        <div className="flex items-end justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-lg font-semibold tracking-tight">
+            <h2 className="text-lg sm:text-xl font-semibold tracking-tight">
               Recent activity
             </h2>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               A cleaner transaction list with better hierarchy.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-col gap-2 w-full sm:w-auto sm:flex-row sm:items-center sm:flex-wrap">
             <input
               placeholder="Search title..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-9 rounded-xl border border-border/70 bg-background px-3 text-sm shadow-sm outline-none"
+              className="h-8 sm:h-9 rounded-lg sm:rounded-xl border border-border/70 bg-background px-2 sm:px-3 text-xs sm:text-sm shadow-sm outline-none flex-1 sm:flex-none"
             />
 
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="h-9 rounded-xl border border-border/70 bg-background px-3 text-sm shadow-sm outline-none"
+              className="h-8 sm:h-9 rounded-lg sm:rounded-xl border border-border/70 bg-background px-2 sm:px-3 text-xs sm:text-sm shadow-sm outline-none flex-1 sm:flex-none"
             >
               {categories.map((c) => (
                 <option key={c} value={c}>
@@ -675,10 +675,11 @@ export function DashboardClient({
               ))}
             </select>
 
-            <div className="flex gap-1">
+            <div className="flex gap-1 overflow-x-auto">
               <Button
                 variant={filterType === "all" ? undefined : "ghost"}
                 size="sm"
+                className="text-xs sm:text-sm flex-shrink-0"
                 onClick={() => setFilterType("all")}
               >
                 All
@@ -686,6 +687,7 @@ export function DashboardClient({
               <Button
                 variant={filterType === "income" ? undefined : "ghost"}
                 size="sm"
+                className="text-xs sm:text-sm flex-shrink-0"
                 onClick={() => setFilterType("income")}
               >
                 Income
@@ -693,19 +695,25 @@ export function DashboardClient({
               <Button
                 variant={filterType === "expense" ? undefined : "ghost"}
                 size="sm"
+                className="text-xs sm:text-sm flex-shrink-0"
                 onClick={() => setFilterType("expense")}
               >
                 Expense
               </Button>
             </div>
 
-            <span className="rounded-full border border-border/70 bg-muted/40 px-3 py-1 text-xs font-medium text-muted-foreground">
+            <span className="rounded-full border border-border/70 bg-muted/40 px-2 sm:px-3 py-0.5 sm:py-1 text-xs font-medium text-muted-foreground flex-shrink-0">
               {filteredExpenses.length} result
               {filteredExpenses.length === 1 ? "" : "s"}
             </span>
 
             {hasActiveFilters ? (
-              <Button variant="ghost" size="sm" onClick={resetFilters}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={resetFilters}
+                className="text-xs sm:text-sm h-8 sm:h-9"
+              >
                 Reset
               </Button>
             ) : null}
@@ -714,40 +722,49 @@ export function DashboardClient({
               size="sm"
               onClick={() => exportCSV(filteredExpenses)}
               disabled={csvReadyExpenses.length === 0}
+              className="text-xs sm:text-sm h-8 sm:h-9 flex-1 sm:flex-none"
             >
               Export CSV ({csvReadyExpenses.length})
             </Button>
 
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline" size="sm">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="text-xs sm:text-sm h-8 sm:h-9 flex-1 sm:flex-none"
+                >
                   CSV Options
                 </Button>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="w-full sm:max-w-md">
                 <DialogHeader>
                   <DialogTitle>CSV Export Settings</DialogTitle>
                 </DialogHeader>
 
                 <div className="space-y-4">
-                  <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="grid gap-3 grid-cols-1 sm:grid-cols-2">
                     <div className="space-y-1.5">
-                      <label className="text-sm font-medium">From date</label>
+                      <label className="text-xs sm:text-sm font-medium">
+                        From date
+                      </label>
                       <input
                         type="date"
                         value={csvFromDate}
                         onChange={(e) => setCsvFromDate(e.target.value)}
-                        className="h-10 w-full rounded-xl border border-border/70 bg-background px-3 text-sm shadow-sm outline-none"
+                        className="h-8 sm:h-10 w-full rounded-lg sm:rounded-xl border border-border/70 bg-background px-2 sm:px-3 text-xs sm:text-sm shadow-sm outline-none"
                       />
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="text-sm font-medium">To date</label>
+                      <label className="text-xs sm:text-sm font-medium">
+                        To date
+                      </label>
                       <input
                         type="date"
                         value={csvToDate}
                         onChange={(e) => setCsvToDate(e.target.value)}
-                        className="h-10 w-full rounded-xl border border-border/70 bg-background px-3 text-sm shadow-sm outline-none"
+                        className="h-8 sm:h-10 w-full rounded-lg sm:rounded-xl border border-border/70 bg-background px-2 sm:px-3 text-xs sm:text-sm shadow-sm outline-none"
                       />
                     </div>
                   </div>
@@ -847,17 +864,19 @@ export function DashboardClient({
                 key={e.id}
                 className="border-border/70 bg-background/90 shadow-sm backdrop-blur transition-transform duration-200 hover:-translate-y-0.5"
               >
-                <CardContent className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="space-y-1">
+                <CardContent className="flex flex-col gap-3 p-3 sm:gap-4 sm:p-5 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="space-y-0.5 sm:space-y-1 min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="font-medium leading-none">{e.title}</p>
+                      <p className="font-medium leading-none text-sm sm:text-base truncate">
+                        {e.title}
+                      </p>
                       {e.recurring ? (
                         <span className="rounded-full border border-sky-500/20 bg-sky-500/10 px-2 py-0.5 text-[11px] font-medium text-sky-700">
                           🔁 Recurring
                         </span>
                       ) : null}
                     </div>
-                    <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                    <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
                       <span>{e.category}</span>
                       <span className="hidden sm:inline">•</span>
                       <span>
@@ -870,9 +889,9 @@ export function DashboardClient({
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-3 sm:justify-end">
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 sm:justify-end">
                     <p
-                      className={`text-sm font-semibold ${
+                      className={`text-xs sm:text-sm font-semibold ${
                         e.type === "expense"
                           ? "text-rose-600"
                           : "text-emerald-600"
@@ -886,14 +905,20 @@ export function DashboardClient({
 
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button variant="outline" size="sm">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="text-xs sm:text-sm h-8 sm:h-auto"
+                        >
                           <Edit size={14} />
-                          Edit
+                          <span className="hidden sm:inline ml-1">Edit</span>
                         </Button>
                       </DialogTrigger>
-                      <DialogContent>
+                      <DialogContent className="w-full sm:max-w-md">
                         <DialogHeader>
-                          <DialogTitle>Edit expense</DialogTitle>
+                          <DialogTitle className="text-base sm:text-lg">
+                            Edit expense
+                          </DialogTitle>
                         </DialogHeader>
                         <EditExpenseForm expense={e} />
                       </DialogContent>
@@ -901,14 +926,20 @@ export function DashboardClient({
 
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Button variant="destructive" size="sm">
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          className="text-xs sm:text-sm h-8 sm:h-auto"
+                        >
                           <Trash size={14} />
-                          Delete
+                          <span className="hidden sm:inline ml-1">Delete</span>
                         </Button>
                       </DialogTrigger>
-                      <DialogContent>
+                      <DialogContent className="w-full sm:max-w-md">
                         <DialogHeader>
-                          <DialogTitle>Delete transaction?</DialogTitle>
+                          <DialogTitle className="text-base sm:text-lg">
+                            Delete transaction?
+                          </DialogTitle>
                           <DialogDescription>
                             This action cannot be undone. "{e.title}" will be
                             permanently removed.
