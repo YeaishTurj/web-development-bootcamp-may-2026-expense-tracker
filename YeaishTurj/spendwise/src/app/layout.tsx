@@ -45,7 +45,7 @@ export default async function RootLayout({
                   </div>
                 </Link>
 
-                <nav className="flex items-center gap-1 sm:gap-2 overflow-x-auto">
+                <nav className="flex items-center gap-1 sm:gap-2 flex-wrap">
                   <Button
                     variant="ghost"
                     size="sm"
@@ -58,9 +58,12 @@ export default async function RootLayout({
                     variant="ghost"
                     size="sm"
                     asChild
-                    className="rounded-full px-2 sm:px-4 text-xs sm:text-sm text-muted-foreground hover:text-foreground hidden sm:inline-flex"
+                    className="rounded-full px-2 sm:px-4 text-xs sm:text-sm text-muted-foreground hover:text-foreground flex-shrink-0"
                   >
-                    <Link href="/dashboard">Dashboard</Link>
+                    <Link href="/dashboard">
+                      <span className="sm:hidden">Dash</span>
+                      <span className="hidden sm:inline">Dashboard</span>
+                    </Link>
                   </Button>
                   <Button
                     size="sm"
@@ -72,7 +75,18 @@ export default async function RootLayout({
                       <span className="hidden sm:inline">Add Expense</span>
                     </Link>
                   </Button>
-                  {isLoggedIn ? <LogoutButton /> : null}
+                  {isLoggedIn ? (
+                    <LogoutButton />
+                  ) : (
+                    <Button
+                      size="sm"
+                      asChild
+                      variant="outline"
+                      className="rounded-full px-2 sm:px-4 text-xs sm:text-sm flex-shrink-0"
+                    >
+                      <Link href="/login">Sign In</Link>
+                    </Button>
+                  )}
                 </nav>
               </div>
             </header>
