@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import AnimatedPrimaryButton from "@/components/ui/animated-primary-button";
 import { toast } from "sonner";
 import {
   Card,
@@ -80,14 +81,14 @@ export default function LoginPage() {
               />
             </div>
 
-            <Button
+            <AnimatedPrimaryButton
               className="w-full rounded-full"
               onClick={handleLogin}
               disabled={loading}
             >
               {loading ? "Signing in..." : "Login"}
               <ArrowRight className="size-4" />
-            </Button>
+            </AnimatedPrimaryButton>
 
             <p className="text-sm text-muted-foreground">
               No account yet?{" "}

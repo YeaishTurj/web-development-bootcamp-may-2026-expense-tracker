@@ -1,7 +1,6 @@
 import "./globals.css";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { LogoutButton } from "@/app/(auth)/logoutBtn";
+import Nav from "@/components/Nav";
 import { Toaster } from "sonner";
 import { createClient } from "@/lib/supabase/server";
 
@@ -21,20 +20,29 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/logo.png" sizes="512x512" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#0ea5e9" />
+        <meta name="msapplication-TileImage" content="/logo.png" />
+      </head>
       <body className="bg-background text-foreground antialiased">
         <div className="relative min-h-screen overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(37,99,235,0.12),_transparent_28%),radial-gradient(circle_at_top_right,_rgba(16,185,129,0.12),_transparent_26%),linear-gradient(to_bottom,_rgba(255,255,255,0.82),_rgba(255,255,255,0.96))]" />
 
           <div className="relative flex min-h-screen flex-col">
             <header className="fixed left-0 right-0 top-2 z-40 px-2 sm:px-4 lg:px-8">
-              <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-1 sm:gap-2 rounded-full border border-border/70 bg-background/80 px-2 sm:px-4 py-2 sm:py-3 shadow-[0_20px_80px_-42px_rgba(15,23,42,0.35)] backdrop-blur-xl">
+              <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-1 sm:gap-2 rounded-full border border-border/70 bg-background/80 glass-light px-2 sm:px-4 py-2 sm:py-3 shadow-[0_20px_80px_-42px_rgba(15,23,42,0.35)] backdrop-blur-xl">
                 <Link
                   href="/"
                   className="flex items-center gap-2 sm:gap-3 flex-shrink-0"
                 >
-                  <span className="flex size-8 sm:size-10 items-center justify-center rounded-full border border-primary/15 bg-primary text-xs sm:text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/20">
-                    S
-                  </span>
+                  <img
+                    src="/logo.png"
+                    alt="SpendWise logo"
+                    className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover"
+                  />
                   <div className="hidden sm:block">
                     <p className="text-xs sm:text-sm font-semibold tracking-tight">
                       SpendWise
@@ -45,49 +53,7 @@ export default async function RootLayout({
                   </div>
                 </Link>
 
-                <nav className="flex items-center gap-1 sm:gap-2 flex-wrap">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    asChild
-                    className="rounded-full px-2 sm:px-4 text-xs sm:text-sm text-muted-foreground hover:text-foreground flex-shrink-0"
-                  >
-                    <Link href="/">Home</Link>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    asChild
-                    className="rounded-full px-2 sm:px-4 text-xs sm:text-sm text-muted-foreground hover:text-foreground flex-shrink-0"
-                  >
-                    <Link href="/dashboard">
-                      <span className="sm:hidden">Dash</span>
-                      <span className="hidden sm:inline">Dashboard</span>
-                    </Link>
-                  </Button>
-                  <Button
-                    size="sm"
-                    asChild
-                    className="rounded-full px-2 sm:px-5 text-xs sm:text-sm flex-shrink-0"
-                  >
-                    <Link href="/dashboard/add">
-                      <span className="sm:hidden">Add</span>
-                      <span className="hidden sm:inline">Add Expense</span>
-                    </Link>
-                  </Button>
-                  {isLoggedIn ? (
-                    <LogoutButton />
-                  ) : (
-                    <Button
-                      size="sm"
-                      asChild
-                      variant="outline"
-                      className="rounded-full px-2 sm:px-4 text-xs sm:text-sm flex-shrink-0"
-                    >
-                      <Link href="/login">Sign In</Link>
-                    </Button>
-                  )}
-                </nav>
+                <Nav isLoggedIn={isLoggedIn} />
               </div>
             </header>
 

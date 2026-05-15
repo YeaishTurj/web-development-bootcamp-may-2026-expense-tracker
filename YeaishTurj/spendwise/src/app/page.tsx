@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import AnimatedPrimaryButton from "@/components/ui/animated-primary-button";
 import {
   Card,
   CardContent,
@@ -50,7 +51,7 @@ export default async function Home() {
           </div>
 
           <div className="space-y-5">
-            <h1 className="max-w-2xl text-4xl font-semibold leading-[1.02] tracking-tight text-balance sm:text-5xl lg:text-6xl xl:text-[4.5rem]">
+            <h1 className="max-w-2xl text-4xl font-semibold leading-[1.02] tracking-tight text-balance sm:text-5xl lg:text-6xl xl:text-[4.5rem] text-gradient-cyan">
               Take Control of Your Finances
             </h1>
             <p className="max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
@@ -61,9 +62,9 @@ export default async function Home() {
 
           <div className="flex flex-col gap-3 sm:flex-row">
             {!isLoggedIn && (
-              <Button size="lg" asChild className="rounded-full px-6 sm:px-7">
+              <AnimatedPrimaryButton className="rounded-full px-6 sm:px-7">
                 <Link href="/signup">Create Free Account</Link>
-              </Button>
+              </AnimatedPrimaryButton>
             )}
             <Button
               variant="outline"
