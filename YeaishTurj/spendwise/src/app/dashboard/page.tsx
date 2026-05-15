@@ -8,8 +8,17 @@ type Expense = {
   title: string;
   amount: number;
   category: string;
-  type: "income" | "expense";
+  type: string;
+  currency: string;
+  recurring: boolean;
+  userId: string;
   createdAt: Date;
+  updatedAt: Date;
+};
+
+type Budget = {
+  amount: number;
+  currency: string;
 };
 
 export default async function Dashboard() {
@@ -30,52 +39,31 @@ export default async function Dashboard() {
     },
   });
 
-  const income = expenses
-    .filter((e) => e.type === "income")
-    .reduce((acc, curr) => acc + curr.amount, 0);
-
-  const expense = expenses
-    .filter((e) => e.type === "expense")
-    .reduce((acc, curr) => acc + curr.amount, 0);
-
-  const categoryMap: Record<string, number> = {};
-
-  expenses.forEach((e) => {
-    if (e.type === "expense") {
-      categoryMap[e.category] = (categoryMap[e.category] || 0) + e.amount;
+  const budgetDelegate = (
+    prisma as unknown as {
+      budget?: {
+        findFirst: (args: {
+          where: { userId: string };
+        }) => Promise<Budget | null>;
+      };
     }
-  });
+  ).budget;
 
-  const categoryData = Object.keys(categoryMap).map((key) => ({
-    name: key,
-    value: categoryMap[key],
-  }));
+  const budget: Budget | null = budgetDelegate
+    ? await budgetDelegate.findFirst({
+        where: {
+          userId: data.user.id,
+        },
+      })
+    : null;
 
-  const monthlyMap: Record<string, number> = {};
-
-  expenses.forEach((e) => {
-    const month = new Date(e.createdAt).toLocaleString("default", {
-      month: "short",
-    });
-
-    monthlyMap[month] = (monthlyMap[month] || 0) + e.amount;
-  });
-
-  const monthlyData = Object.keys(monthlyMap).map((key) => ({
-    month: key,
-    amount: monthlyMap[key],
-  }));
-
-  const balance = income - expense;
+  const budgetAmount = budget?.amount || 0;
 
   return (
     <DashboardClient
       expenses={expenses}
-      income={income}
-      expense={expense}
-      balance={balance}
-      categoryData={categoryData}
-      monthlyData={monthlyData}
+      budgetAmount={budgetAmount}
+      budgetCurrency={budget?.currency || "BDT"}
     />
   );
 }
