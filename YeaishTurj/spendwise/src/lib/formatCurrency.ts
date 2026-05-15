@@ -1,15 +1,16 @@
+import { getCurrencySymbol } from "./currency";
+
 export function formatCurrency(
   value: number,
   locale = "en-US",
-  currency = "USD",
+  currency = "BDT",
 ) {
   try {
-    return new Intl.NumberFormat(locale, {
-      style: "currency",
-      currency,
+    const symbol = getCurrencySymbol(currency);
+    return `${symbol}${new Intl.NumberFormat(locale, {
       maximumFractionDigits: 0,
-    }).format(value);
+    }).format(value)}`;
   } catch (e) {
-    return `$${value}`;
+    return `${getCurrencySymbol(currency)}${value}`;
   }
 }
