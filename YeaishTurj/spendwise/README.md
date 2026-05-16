@@ -14,9 +14,9 @@ Track income and expenses, manage monthly budgets, and visualize spending patter
 [![Supabase](https://img.shields.io/badge/Supabase-Auth_%26_DB-3ECF8E?style=flat-square&logo=supabase)](https://supabase.com/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
 
-[**Live Demo**](https://spendwise-seven-gold.vercel.app/) · [**Watch Demo on YouTube**](https://youtu.be/IidA2M8fZvc) · [**API Docs**](./API_DOCUMENTATION.md) · [**Database Docs**](./DATABASE.md)
+[**Live Demo**](https://spendwise-seven-gold.vercel.app/) · [**Watch Demo on YouTube**](https://youtu.be/31_tfzguh5Q) · [**API Docs**](./API_DOCUMENTATION.md) · [**Database Docs**](./DATABASE.md)
 
-> ⚠️ **Note:** Deployed on Vercel's free tier — initial load may take a few seconds due to cold start. For a full walkthrough of features, watch the [YouTube demo](https://youtu.be/IidA2M8fZvc).
+> ⚠️ **Note:** Deployed on Vercel's free tier — initial load may take a few seconds due to cold start. For a full walkthrough of features, watch the [YouTube demo](https://youtu.be/31_tfzguh5Q).
 
 </div>
 
@@ -49,33 +49,39 @@ SpendWise is a full-stack personal finance dashboard that gives you a real-time 
 ## Features
 
 ### Expense Tracking
+
 - Record income and expenses with title, amount, category, date, and currency
 - Edit and delete transactions at any time
 - Export transactions to CSV with custom date ranges and selectable columns
 
 ### Budget Management
+
 - Set and update monthly budgets per currency
 - Visual budget progress and overspend indicators
 
 ### Dashboard Analytics
+
 - **Summary Cards** — real-time balance, income, and expenses for the current month
 - **Pie Chart** — category breakdown of spending
 - **Bar Chart** — monthly spending trends over time
 - **Empty States** — professional placeholders when no data is available yet
 
 ### Filtering & Search
+
 - Filter by transaction type (income / expense / all)
 - Filter by category
 - Full-text search by transaction title
 - Date-range picker for CSV exports
 
 ### Authentication & Security
+
 - Email/password sign-up with mandatory email verification
 - Password reset via Supabase email flow
 - Server-side session validation on every protected route
 - Complete data isolation — users can only access their own records
 
 ### Design & Accessibility
+
 - Mobile-first responsive layout (xs → sm → md → lg breakpoints)
 - Consistent shadcn/ui component library
 - Toast notifications via Sonner
@@ -87,35 +93,35 @@ SpendWise is a full-stack personal finance dashboard that gives you a real-time 
 
 ### Frontend
 
-| Technology | Version | Purpose |
-|---|---|---|
-| Next.js | 16.2.6 | React framework with App Router & Turbopack |
-| React | 19.2.4 | UI rendering with hooks |
-| TypeScript | — | End-to-end type safety |
-| Tailwind CSS | v4 | Utility-first styling |
-| shadcn/ui | — | Composable UI component library |
-| Recharts | 3.8.1 | Pie and bar chart visualizations |
-| Lucide React | 1.14.0 | Icon library |
-| React Hook Form | — | Performant form state management |
-| Zod | — | Schema validation |
-| Sonner | 2.0.7 | Toast notifications |
+| Technology      | Version | Purpose                                     |
+| --------------- | ------- | ------------------------------------------- |
+| Next.js         | 16.2.6  | React framework with App Router & Turbopack |
+| React           | 19.2.4  | UI rendering with hooks                     |
+| TypeScript      | —       | End-to-end type safety                      |
+| Tailwind CSS    | v4      | Utility-first styling                       |
+| shadcn/ui       | —       | Composable UI component library             |
+| Recharts        | 3.8.1   | Pie and bar chart visualizations            |
+| Lucide React    | 1.14.0  | Icon library                                |
+| React Hook Form | —       | Performant form state management            |
+| Zod             | —       | Schema validation                           |
+| Sonner          | 2.0.7   | Toast notifications                         |
 
 ### Backend & Database
 
-| Technology | Version | Purpose |
-|---|---|---|
-| Next.js Server Actions | — | Type-safe backend operations |
-| Prisma ORM | 7.8.0 | Type-safe database access layer |
-| PostgreSQL | — | Relational database |
-| Supabase | — | PostgreSQL hosting + authentication |
+| Technology             | Version | Purpose                             |
+| ---------------------- | ------- | ----------------------------------- |
+| Next.js Server Actions | —       | Type-safe backend operations        |
+| Prisma ORM             | 7.8.0   | Type-safe database access layer     |
+| PostgreSQL             | —       | Relational database                 |
+| Supabase               | —       | PostgreSQL hosting + authentication |
 
 ### Authentication
 
-| Package | Purpose |
-|---|---|
-| Supabase Auth | Session management (sign-up, login, password reset) |
-| @supabase/ssr | Server component auth support |
-| @supabase/supabase-js | Client-side auth SDK |
+| Package               | Purpose                                             |
+| --------------------- | --------------------------------------------------- |
+| Supabase Auth         | Session management (sign-up, login, password reset) |
+| @supabase/ssr         | Server component auth support                       |
+| @supabase/supabase-js | Client-side auth SDK                                |
 
 ---
 
@@ -207,6 +213,7 @@ model Budget {
 ```
 
 **Design Notes:**
+
 - `userId` maps to the Supabase auth user UUID — no foreign-key join required
 - `@@index([userId])` ensures all per-user queries are fast regardless of table size
 - Category values are always lowercased before storage for consistent filtering
@@ -221,27 +228,27 @@ Sign Up → Email Verification → Login → Dashboard (server-side session chec
                                     Unauthenticated → Redirect to /login
 ```
 
-| Step | Mechanism |
-|---|---|
-| Sign Up | Supabase Auth — creates user, sends verification email |
-| Email Verification | Required before first login |
-| Login | Email + password via Supabase Auth |
-| Session | Server-side validation via `createClient()` on every request |
-| Password Reset | Supabase sends a secure reset link to the user's email |
-| Logout | Clears session, redirects to `/login` |
-| Route Protection | Middleware + server-side checks on all `/dashboard/*` routes |
+| Step               | Mechanism                                                    |
+| ------------------ | ------------------------------------------------------------ |
+| Sign Up            | Supabase Auth — creates user, sends verification email       |
+| Email Verification | Required before first login                                  |
+| Login              | Email + password via Supabase Auth                           |
+| Session            | Server-side validation via `createClient()` on every request |
+| Password Reset     | Supabase sends a secure reset link to the user's email       |
+| Logout             | Clears session, redirects to `/login`                        |
+| Route Protection   | Middleware + server-side checks on all `/dashboard/*` routes |
 
 ---
 
 ## Currency Support
 
-| Currency | Code | Symbol |
-|---|---|---|
-| Bangladeshi Taka *(default)* | BDT | ৳ |
-| US Dollar | USD | $ |
-| Euro | EUR | € |
-| British Pound | GBP | £ |
-| Indian Rupee | INR | ₹ |
+| Currency                     | Code | Symbol |
+| ---------------------------- | ---- | ------ |
+| Bangladeshi Taka _(default)_ | BDT  | ৳      |
+| US Dollar                    | USD  | $      |
+| Euro                         | EUR  | €      |
+| British Pound                | GBP  | £      |
+| Indian Rupee                 | INR  | ₹      |
 
 - Each transaction and budget record stores its own currency code
 - Conversion is handled client-side using hardcoded exchange rates
@@ -303,12 +310,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Available Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start development server with Turbopack |
-| `npm run build` | Build optimized production bundle |
-| `npm start` | Start production server |
-| `npm run lint` | Run ESLint across the project |
+| Command         | Description                             |
+| --------------- | --------------------------------------- |
+| `npm run dev`   | Start development server with Turbopack |
+| `npm run build` | Build optimized production bundle       |
+| `npm start`     | Start production server                 |
+| `npm run lint`  | Run ESLint across the project           |
 
 ---
 
@@ -321,12 +328,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 3. Set the **Root Directory** to `spendwise`
 4. Add the following environment variables in the Vercel dashboard:
 
-| Variable | Description |
-|---|---|
-| `DATABASE_URL` | Supabase pooled connection URL |
-| `DIRECT_URL` | Supabase direct connection URL |
-| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anon/public key |
+| Variable                        | Description                    |
+| ------------------------------- | ------------------------------ |
+| `DATABASE_URL`                  | Supabase pooled connection URL |
+| `DIRECT_URL`                    | Supabase direct connection URL |
+| `NEXT_PUBLIC_SUPABASE_URL`      | Your Supabase project URL      |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anon/public key  |
 
 5. Click **Deploy**
 
