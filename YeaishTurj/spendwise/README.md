@@ -51,7 +51,14 @@ A modern, responsive finance dashboard built with Next.js that helps you track e
 - **@supabase/ssr** - Server component support
 - **@supabase/supabase-js** - Client-side auth
 
-## 📋 Prerequisites
+## � Documentation
+
+Comprehensive guides for developing and maintaining SpendWise:
+
+- **[API Documentation](./API_DOCUMENTATION.md)** - Complete Server Actions API reference, authentication flows, error handling, and code examples
+- **[Database Documentation](./DATABASE.md)** - Schema models, Prisma queries, data isolation patterns, migrations, and optimization tips
+
+## �📋 Prerequisites
 
 - Node.js 18+
 - npm or yarn
@@ -69,7 +76,7 @@ npm install
 
 ### 2. Environment Setup
 
-Create a `.env.local` file in the root directory:
+Create a `.env.local` file in the root directory (see [.env.example](./.env.example) for template):
 
 ```env
 # Database (Prisma + Supabase)
@@ -143,6 +150,8 @@ spendwise/
 
 ## 🗄️ Database Schema
 
+For detailed database documentation, see [DATABASE.md](./DATABASE.md) for schema models, Prisma queries, migrations, and optimization.
+
 ### Expense Model
 
 ```prisma
@@ -214,6 +223,8 @@ model Budget {
 - Date range picker for exports
 
 ## 🔧 Server Actions
+
+For complete API documentation with examples and error handling, see [API_DOCUMENTATION.md](./API_DOCUMENTATION.md).
 
 ### Expense Actions (`src/actions/expense.ts`)
 
