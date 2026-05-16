@@ -7,6 +7,10 @@ A modern, responsive finance dashboard built with Next.js that helps you track e
 ![TypeScript](https://img.shields.io/badge/TypeScript-blue?logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B6FF?logo=tailwindcss)
 
+## 🌐 Live Demo
+
+**[View Live Demo](https://spendwise-seven-gold.vercel.app/)** - Deployed on Vercel
+
 ## 🚀 Features
 
 - **Expense Tracking**: Record income and expenses with category, date, and amount
