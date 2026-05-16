@@ -90,6 +90,21 @@ export default function LoginPage() {
               <ArrowRight className="size-4" />
             </AnimatedPrimaryButton>
 
+            <div className="flex items-center justify-between text-sm">
+              <Link
+                className="text-muted-foreground underline underline-offset-4 transition hover:text-foreground"
+                href="/forgot-password"
+              >
+                Forgot password?
+              </Link>
+              <Link
+                className="font-medium text-foreground underline underline-offset-4"
+                href="/signup"
+              >
+                Create account
+              </Link>
+            </div>
+
             <p className="text-sm text-muted-foreground">
               No account yet?{" "}
               <Link
