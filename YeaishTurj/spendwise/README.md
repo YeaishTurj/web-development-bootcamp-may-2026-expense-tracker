@@ -7,9 +7,15 @@ A modern, responsive finance dashboard built with Next.js that helps you track e
 ![TypeScript](https://img.shields.io/badge/TypeScript-blue?logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B6FF?logo=tailwindcss)
 
+## � Quick Overview
+
+**[Watch Demo on YouTube](https://youtu.be/IidA2M8fZvc)** ⭐ **Recommended:** Watch this video to understand the project features and functionality.
+
 ## 🌐 Live Demo
 
 **[View Live Demo](https://spendwise-seven-gold.vercel.app/)** - Deployed on Vercel
+
+> ⚠️ **Note:** The app is deployed on Vercel's free plan. Initial load may take a few seconds due to cold start. Some API requests may be rate-limited. Please watch the [YouTube demo](https://youtu.be/IidA2M8fZvc) to see the full functionality in action.
 
 ## 🚀 Features
 
