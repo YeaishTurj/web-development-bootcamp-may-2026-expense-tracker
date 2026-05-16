@@ -7,7 +7,13 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
-export function LogoutButton() {
+export function LogoutButton({
+  className,
+  onClick,
+}: {
+  className?: string;
+  onClick?: () => void;
+}) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -28,9 +34,12 @@ export function LogoutButton() {
     <Button
       variant="destructive"
       size="sm"
-      onClick={logout}
+      onClick={() => {
+        onClick?.();
+        void logout();
+      }}
       disabled={loading}
-      className="text-xs sm:text-sm px-2 sm:px-3 flex-shrink-0"
+      className={`shrink-0 px-2 text-xs sm:px-3 sm:text-sm ${className ?? ""}`}
     >
       <LogOut className="size-3 sm:size-4" />
       <span className="hidden sm:inline ml-1">
