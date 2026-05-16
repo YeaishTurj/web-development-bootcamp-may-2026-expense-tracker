@@ -37,7 +37,7 @@ export default function LoginPage() {
     }
 
     router.push("/dashboard");
-    router.refresh();  // Refresh server components to get updated auth state
+    router.refresh(); // Refresh server components to get updated auth state
   };
 
   return (
