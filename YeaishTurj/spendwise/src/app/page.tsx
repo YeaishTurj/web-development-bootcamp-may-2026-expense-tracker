@@ -45,16 +45,17 @@ export default async function Home() {
     <div className="space-y-14 lg:space-y-20">
       <section className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
         <div className="space-y-7">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground shadow-sm backdrop-blur">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/80 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-600 shadow-sm backdrop-blur dark:text-slate-300">
             <Sparkles className="size-3.5 text-emerald-500" /> Finance, made
             simpler
           </div>
 
           <div className="space-y-5">
-            <h1 className="max-w-2xl text-4xl font-semibold leading-[1.02] tracking-tight text-balance sm:text-5xl lg:text-6xl xl:text-[4.5rem] text-gradient-cyan">
-              Take Control of Your Finances
+            <h1 className="max-w-2xl text-4xl font-semibold leading-[1.02] tracking-tight text-balance text-slate-950 sm:text-5xl lg:text-6xl xl:text-[4.5rem] dark:text-slate-50">
+              Take Control of Your{" "}
+              <span className="text-sky-600 dark:text-sky-400">Finances</span>
             </h1>
-            <p className="max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
+            <p className="max-w-xl text-base leading-8 text-slate-600 sm:text-lg dark:text-slate-300">
               Track expenses, analyze spending, and manage budgets with a modern
               finance dashboard.
             </p>
@@ -67,10 +68,9 @@ export default async function Home() {
               </AnimatedPrimaryButton>
             )}
             <Button
-              variant="outline"
               size="lg"
               asChild
-              className="rounded-full px-6 sm:px-7"
+              className="rounded-full border border-slate-900/10 bg-slate-950 px-6 text-white shadow-[0_18px_40px_-18px_rgba(15,23,42,0.42)] transition hover:bg-slate-800 hover:shadow-[0_22px_50px_-16px_rgba(15,23,42,0.48)] sm:px-7 dark:bg-slate-50 dark:text-slate-950 dark:hover:bg-slate-200"
             >
               <Link href="/dashboard">
                 View Dashboard
@@ -91,8 +91,10 @@ export default async function Home() {
                     <item.icon className="size-4" />
                   </div>
                   <div className="space-y-1">
-                    <p className="text-sm font-semibold">{item.title}</p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm font-semibold text-slate-950 dark:text-slate-50">
+                      {item.title}
+                    </p>
+                    <p className="text-sm text-slate-600 dark:text-slate-300">
                       {item.description}
                     </p>
                   </div>
@@ -111,7 +113,7 @@ export default async function Home() {
             <CardTitle className="text-2xl font-semibold tracking-tight sm:text-3xl">
               Analytics preview
             </CardTitle>
-            <CardDescription className="max-w-md text-sm leading-7">
+            <CardDescription className="max-w-md text-sm leading-7 text-slate-600 dark:text-slate-300">
               A quick snapshot of how the dashboard presents your money.
             </CardDescription>
           </CardHeader>
@@ -139,13 +141,17 @@ export default async function Home() {
 
             <div className="space-y-3 rounded-2xl border border-border/70 bg-muted/25 p-4 shadow-inner">
               <div className="flex items-center justify-between text-sm">
-                <span className="font-medium">Spending momentum</span>
-                <span className="text-muted-foreground">72% healthy</span>
+                <span className="font-medium text-slate-900 dark:text-slate-50">
+                  Spending momentum
+                </span>
+                <span className="text-slate-500 dark:text-slate-400">
+                  72% healthy
+                </span>
               </div>
               <div className="h-2 overflow-hidden rounded-full bg-background">
                 <div className="h-full w-[72%] rounded-full bg-linear-to-r from-emerald-500 via-blue-500 to-sky-500" />
               </div>
-              <p className="text-sm leading-6 text-muted-foreground">
+              <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">
                 Clean spacing, calmer colors, and stronger hierarchy make the
                 product easier to trust at a glance.
               </p>
@@ -157,24 +163,30 @@ export default async function Home() {
       <section className="grid gap-4 md:grid-cols-3">
         <Card className="border-border/70 bg-background/80 shadow-sm backdrop-blur">
           <CardHeader>
-            <CardTitle>Premium feel</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-slate-950 dark:text-slate-50">
+              Premium feel
+            </CardTitle>
+            <CardDescription className="text-slate-600 dark:text-slate-300">
               Sharper spacing and calmer surfaces.
             </CardDescription>
           </CardHeader>
         </Card>
         <Card className="border-border/70 bg-background/80 shadow-sm backdrop-blur">
           <CardHeader>
-            <CardTitle>Fast overview</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-slate-950 dark:text-slate-50">
+              Fast overview
+            </CardTitle>
+            <CardDescription className="text-slate-600 dark:text-slate-300">
               Important numbers stay visible first.
             </CardDescription>
           </CardHeader>
         </Card>
         <Card className="border-border/70 bg-background/80 shadow-sm backdrop-blur">
           <CardHeader>
-            <CardTitle>Portfolio-ready</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-slate-950 dark:text-slate-50">
+              Portfolio-ready
+            </CardTitle>
+            <CardDescription className="text-slate-600 dark:text-slate-300">
               Looks finished, not like a class project.
             </CardDescription>
           </CardHeader>
