@@ -20,6 +20,7 @@ Complete guide to the SpendWise database schema, data models, and relationships 
 ## Database Overview
 
 ### Tech Stack
+
 - **Database**: PostgreSQL (hosted on Supabase)
 - **ORM**: Prisma 7.8.0
 - **Connection**: Direct URL for migrations, standard URL for app
@@ -42,11 +43,11 @@ DIRECT_URL="postgresql://user:password@host.supabase.co:6543/postgres"
 All data is isolated by **userId** (Supabase user ID). Each user sees only their own expenses and budgets:
 
 ```
-User Authentication (Supabase) 
+User Authentication (Supabase)
     ↓
-Supabase Session 
+Supabase Session
     ↓
-Extract user.id 
+Extract user.id
     ↓
 Filter queries by userId
 ```
@@ -78,18 +79,18 @@ model Expense {
 
 #### Fields
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `id` | String | CUID | Unique transaction identifier |
-| `title` | String | — | Transaction description (e.g., "Grocery Shopping", "Salary") |
-| `amount` | Float | — | Transaction amount in specified currency |
-| `category` | String | — | Expense category (e.g., "Food", "Transport", "Salary") |
-| `type` | String | — | Either `"income"` or `"expense"` |
-| `currency` | String | "BDT" | 3-letter currency code (BDT, USD, EUR, GBP, INR) |
-| `recurring` | Boolean | false | Whether this is a recurring transaction |
-| `userId` | String | — | Supabase auth user ID (for data isolation) |
-| `createdAt` | DateTime | now() | Timestamp when expense was created |
-| `updatedAt` | DateTime | now() | Last updated timestamp |
+| Field       | Type     | Default | Description                                                  |
+| ----------- | -------- | ------- | ------------------------------------------------------------ |
+| `id`        | String   | CUID    | Unique transaction identifier                                |
+| `title`     | String   | —       | Transaction description (e.g., "Grocery Shopping", "Salary") |
+| `amount`    | Float    | —       | Transaction amount in specified currency                     |
+| `category`  | String   | —       | Expense category (e.g., "Food", "Transport", "Salary")       |
+| `type`      | String   | —       | Either `"income"` or `"expense"`                             |
+| `currency`  | String   | "BDT"   | 3-letter currency code (BDT, USD, EUR, GBP, INR)             |
+| `recurring` | Boolean  | false   | Whether this is a recurring transaction                      |
+| `userId`    | String   | —       | Supabase auth user ID (for data isolation)                   |
+| `createdAt` | DateTime | now()   | Timestamp when expense was created                           |
+| `updatedAt` | DateTime | now()   | Last updated timestamp                                       |
 
 #### Validation Rules
 
@@ -134,14 +135,14 @@ model Budget {
 
 #### Fields
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `id` | String | CUID | Unique budget identifier |
-| `amount` | Float | — | Monthly budget limit in specified currency |
-| `currency` | String | "BDT" | 3-letter currency code |
-| `userId` | String | — | Supabase auth user ID (for data isolation) |
-| `createdAt` | DateTime | now() | Timestamp when budget was created |
-| `updatedAt` | DateTime | now() | Last updated timestamp |
+| Field       | Type     | Default | Description                                |
+| ----------- | -------- | ------- | ------------------------------------------ |
+| `id`        | String   | CUID    | Unique budget identifier                   |
+| `amount`    | Float    | —       | Monthly budget limit in specified currency |
+| `currency`  | String   | "BDT"   | 3-letter currency code                     |
+| `userId`    | String   | —       | Supabase auth user ID (for data isolation) |
+| `createdAt` | DateTime | now()   | Timestamp when budget was created          |
+| `updatedAt` | DateTime | now()   | Last updated timestamp                     |
 
 #### Validation Rules
 
@@ -211,7 +212,7 @@ Each user's data is isolated using `userId`:
 // Fetch only user's expenses (in Server Action)
 const expenses = await prisma.expense.findMany({
   where: {
-    userId: session.user.id,  // ← User-scoped query
+    userId: session.user.id, // ← User-scoped query
   },
 });
 ```
@@ -227,11 +228,13 @@ Currently, there are **no explicit foreign key relationships** to Supabase Auth 
 ### Why This Design?
 
 ✅ Advantages:
+
 - Flexibility with Auth table schema changes
 - Simple, straightforward isolation
 - No referential integrity overhead
 
 ⚠️ Considerations:
+
 - Orphaned records if user is deleted (can add cleanup triggers)
 - Must validate userId exists in auth layer
 
@@ -246,11 +249,13 @@ The current schema represents the initial production migration.
 ### Running Migrations
 
 **Dev environment:**
+
 ```bash
 npx prisma migrate dev --name add_expense_budget_models
 ```
 
 **Production:**
+
 ```bash
 npx prisma migrate deploy
 ```
@@ -365,7 +370,7 @@ const income = await prisma.expense.findMany({
 
 ```typescript
 const monthStart = new Date(2026, 4, 1); // May 1, 2026
-const monthEnd = new Date(2026, 5, 1);   // June 1, 2026
+const monthEnd = new Date(2026, 5, 1); // June 1, 2026
 
 const expenses = await prisma.expense.findMany({
   where: {
@@ -493,6 +498,7 @@ const byCategory = await prisma.expense.groupBy({
 ### Indexing
 
 Currently, indexes are created automatically on:
+
 - Primary keys (`id`)
 - Foreign key references (`userId`) - implicit
 
@@ -520,8 +526,8 @@ model Budget {
 ```typescript
 const expenses = await prisma.expense.findMany({
   where: { userId: session.user.id },
-  take: 50,      // Limit to 50 records
-  skip: 0,       // Offset
+  take: 50, // Limit to 50 records
+  skip: 0, // Offset
   orderBy: { createdAt: "desc" },
 });
 ```
@@ -560,7 +566,8 @@ const totalIncome = await prisma.expense.aggregate({ type: "income" });
 
 **Problem**: `FATAL: Ident authentication failed for user`
 
-**Solution**: 
+**Solution**:
+
 - Check DATABASE_URL and DIRECT_URL are correct
 - Verify credentials in Supabase dashboard
 - Ensure DIRECT_URL uses port 6543 (direct connection)
@@ -575,6 +582,7 @@ psql $DATABASE_URL -c "SELECT 1"
 **Problem**: `error PrismaClientInitializationError`
 
 **Solution**:
+
 ```bash
 # Reinstall Prisma Client
 npx prisma generate
@@ -613,7 +621,7 @@ const userExpenses = await prisma.expense.findMany({
 ```typescript
 // Schema validation (Zod)
 const expenseSchema = z.object({
-  amount: z.coerce.number().positive(),  // ← Coerce to number
+  amount: z.coerce.number().positive(), // ← Coerce to number
   // ...
 });
 
@@ -626,6 +634,7 @@ const amount = parseFloat(req.body.amount);
 **Problem**: Queries slow with large datasets
 
 **Solution**:
+
 1. Add indexes (see Performance section)
 2. Implement pagination
 3. Use query caching at API level
@@ -643,6 +652,7 @@ cache.set(`user-stats-${userId}`, stats, 3600); // 1 hour TTL
 ### Recommended Improvements
 
 1. **Add Unique Constraint to Budget**:
+
    ```prisma
    model Budget {
      @@unique([userId])  // Only one budget per user
@@ -650,6 +660,7 @@ cache.set(`user-stats-${userId}`, stats, 3600); // 1 hour TTL
    ```
 
 2. **Add Explicit Indexes**:
+
    ```prisma
    model Expense {
      @@index([userId, createdAt])
@@ -657,6 +668,7 @@ cache.set(`user-stats-${userId}`, stats, 3600); // 1 hour TTL
    ```
 
 3. **Add Referential Integrity** (optional):
+
    ```prisma
    model Expense {
      user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -675,6 +687,7 @@ cache.set(`user-stats-${userId}`, stats, 3600); // 1 hour TTL
 ## Support
 
 For issues or questions:
+
 - Check Prisma docs: https://www.prisma.io/docs/
 - Supabase PostgreSQL: https://supabase.com/docs/guides/database
 - See [API_DOCUMENTATION.md](./API_DOCUMENTATION.md) for Server Actions
