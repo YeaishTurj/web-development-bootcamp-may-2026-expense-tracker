@@ -1,156 +1,166 @@
-# SpendWise - Modern Finance Dashboard
+<div align="center">
 
-A modern, responsive finance dashboard built with Next.js that helps you track expenses, analyze spending patterns, and manage budgets with ease. Track your finances in **Bengali Taka (৳)** with multi-currency support.
+# SpendWise
 
-![Finance Dashboard](https://img.shields.io/badge/Next.js-16.2.6-black?logo=next.js)
-![React](https://img.shields.io/badge/React-19.2.4-blue?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-blue?logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B6FF?logo=tailwindcss)
+**A modern personal finance dashboard built for clarity, speed, and control.**
 
-## � Quick Overview
+Track income and expenses, manage monthly budgets, and visualize spending patterns — all in Bengali Taka (৳) with multi-currency support.
 
-**[Watch Demo on YouTube](https://youtu.be/IidA2M8fZvc)** ⭐ **Recommended:** Watch this video to understand the project features and functionality.
+[![Next.js](https://img.shields.io/badge/Next.js-16.2.6-000000?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.2.4-61DAFB?style=flat-square&logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38BDF8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-7.8.0-2D3748?style=flat-square&logo=prisma)](https://www.prisma.io/)
+[![Supabase](https://img.shields.io/badge/Supabase-Auth_%26_DB-3ECF8E?style=flat-square&logo=supabase)](https://supabase.com/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](./LICENSE)
 
-## 🌐 Live Demo
+[**Live Demo**](https://spendwise-seven-gold.vercel.app/) · [**Watch Demo on YouTube**](https://youtu.be/IidA2M8fZvc) · [**API Docs**](./API_DOCUMENTATION.md) · [**Database Docs**](./DATABASE.md)
 
-**[View Live Demo](https://spendwise-seven-gold.vercel.app/)** - Deployed on Vercel
+> ⚠️ **Note:** Deployed on Vercel's free tier — initial load may take a few seconds due to cold start. For a full walkthrough of features, watch the [YouTube demo](https://youtu.be/IidA2M8fZvc).
 
-> ⚠️ **Note:** The app is deployed on Vercel's free plan. Initial load may take a few seconds due to cold start. Some API requests may be rate-limited. Please watch the [YouTube demo](https://youtu.be/IidA2M8fZvc) to see the full functionality in action.
+</div>
 
-## 🚀 Features
+---
 
-- **Expense Tracking**: Record income and expenses with category, date, and amount
-- **Budget Management**: Set monthly budgets with multi-currency support
-- **Dashboard Analytics**:
-  - Real-time balance, income, and expense summaries (current month only)
-  - Category breakdown with pie charts
-  - Monthly spending trends with bar charts
-  - Professional empty states when no data exists
-- **Multi-Currency Support**: Track expenses in multiple currencies (BDT, USD, EUR, GBP, INR) with automatic conversion
-- **Authentication**: Secure user authentication with Supabase
-- **Email Verification**: Post-signup email confirmation flow
-- **Responsive Design**: Mobile-first design with Tailwind CSS breakpoints (xs, sm, md, lg)
-- **Data Export**: Export transactions to CSV with custom date ranges and columns
-- **Transaction Management**: Edit and delete expenses with ease
+## Table of Contents
 
-## 🛠️ Tech Stack
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Database Schema](#database-schema)
+- [Authentication Flow](#authentication-flow)
+- [Currency Support](#currency-support)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Deployment](#deployment)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Overview
+
+SpendWise is a full-stack personal finance dashboard that gives you a real-time view of your financial health. Built with Next.js App Router and server actions, it prioritizes security (server-side auth), performance (Turbopack, Prisma), and a clean mobile-first UI.
+
+---
+
+## Features
+
+### Expense Tracking
+- Record income and expenses with title, amount, category, date, and currency
+- Edit and delete transactions at any time
+- Export transactions to CSV with custom date ranges and selectable columns
+
+### Budget Management
+- Set and update monthly budgets per currency
+- Visual budget progress and overspend indicators
+
+### Dashboard Analytics
+- **Summary Cards** — real-time balance, income, and expenses for the current month
+- **Pie Chart** — category breakdown of spending
+- **Bar Chart** — monthly spending trends over time
+- **Empty States** — professional placeholders when no data is available yet
+
+### Filtering & Search
+- Filter by transaction type (income / expense / all)
+- Filter by category
+- Full-text search by transaction title
+- Date-range picker for CSV exports
+
+### Authentication & Security
+- Email/password sign-up with mandatory email verification
+- Password reset via Supabase email flow
+- Server-side session validation on every protected route
+- Complete data isolation — users can only access their own records
+
+### Design & Accessibility
+- Mobile-first responsive layout (xs → sm → md → lg breakpoints)
+- Consistent shadcn/ui component library
+- Toast notifications via Sonner
+- Fully typed with TypeScript throughout
+
+---
+
+## Tech Stack
 
 ### Frontend
 
-- **Next.js 16.2.6** - React framework with App Router and Turbopack
-- **React 19.2.4** - UI library with hooks
-- **TypeScript** - Type-safe development
-- **Tailwind CSS 4** - Utility-first CSS framework
-- **shadcn/ui** - Pre-built, composable UI components
-- **Recharts 3.8.1** - Data visualization (pie & bar charts)
-- **Lucide React 1.14.0** - Modern icon library
-- **React Hook Form** - Efficient form management
-- **Zod** - TypeScript-first schema validation
-- **Sonner 2.0.7** - Toast notifications
+| Technology | Version | Purpose |
+|---|---|---|
+| Next.js | 16.2.6 | React framework with App Router & Turbopack |
+| React | 19.2.4 | UI rendering with hooks |
+| TypeScript | — | End-to-end type safety |
+| Tailwind CSS | v4 | Utility-first styling |
+| shadcn/ui | — | Composable UI component library |
+| Recharts | 3.8.1 | Pie and bar chart visualizations |
+| Lucide React | 1.14.0 | Icon library |
+| React Hook Form | — | Performant form state management |
+| Zod | — | Schema validation |
+| Sonner | 2.0.7 | Toast notifications |
 
 ### Backend & Database
 
-- **Next.js Server Actions** - Backend operations via server functions
-- **Prisma 7.8.0 ORM** - Type-safe database access
-- **PostgreSQL** - Relational database (via Supabase)
-- **Supabase** - PostgreSQL hosting + authentication
+| Technology | Version | Purpose |
+|---|---|---|
+| Next.js Server Actions | — | Type-safe backend operations |
+| Prisma ORM | 7.8.0 | Type-safe database access layer |
+| PostgreSQL | — | Relational database |
+| Supabase | — | PostgreSQL hosting + authentication |
 
 ### Authentication
 
-- **Supabase Auth** - Server-side and client-side authentication
-- **@supabase/ssr** - Server component support
-- **@supabase/supabase-js** - Client-side auth
+| Package | Purpose |
+|---|---|
+| Supabase Auth | Session management (sign-up, login, password reset) |
+| @supabase/ssr | Server component auth support |
+| @supabase/supabase-js | Client-side auth SDK |
 
-## � Documentation
+---
 
-Comprehensive guides for developing and maintaining SpendWise:
-
-- **[API Documentation](./API_DOCUMENTATION.md)** - Complete Server Actions API reference, authentication flows, error handling, and code examples
-- **[Database Documentation](./DATABASE.md)** - Schema models, Prisma queries, data isolation patterns, migrations, and optimization tips
-
-## �📋 Prerequisites
-
-- Node.js 18+
-- npm or yarn
-- Supabase account (for database & auth)
-
-## 🚀 Getting Started
-
-### 1. Clone and Install
-
-```bash
-git clone <repository-url>
-cd spendwise
-npm install
-```
-
-### 2. Environment Setup
-
-Create a `.env.local` file in the root directory (see [.env.example](./.env.example) for template):
-
-```env
-# Database (Prisma + Supabase)
-DATABASE_URL="postgresql://user:password@host:5432/database"
-DIRECT_URL="postgresql://user:password@host:6543/database"
-
-# Supabase (Frontend Auth)
-NEXT_PUBLIC_SUPABASE_URL="https://your-project.supabase.co"
-NEXT_PUBLIC_SUPABASE_ANON_KEY="your-anon-key"
-```
-
-### 3. Database Setup
-
-Generate Prisma client and run migrations:
-
-```bash
-npx prisma generate
-npx prisma db push
-```
-
-### 4. Run Development Server
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 spendwise/
 ├── src/
 │   ├── app/                          # Next.js App Router
-│   │   ├── (auth)/                   # Auth-related routes
+│   │   ├── (auth)/                   # Auth route group
 │   │   │   ├── login/page.tsx        # Login page
-│   │   │   ├── signup/page.tsx       # Signup page
+│   │   │   ├── signup/page.tsx       # Sign-up page
 │   │   │   └── logoutBtn.tsx         # Logout button component
-│   │   ├── dashboard/                # Dashboard pages
+│   │   ├── dashboard/                # Protected dashboard routes
 │   │   │   ├── page.tsx              # Dashboard home
-│   │   │   ├── add/page.tsx          # Add expense page
-│   │   │   └── budget/page.tsx       # Budget management
-│   │   ├── layout.tsx                # Root layout with navbar
-│   │   ├── page.tsx                  # Home page
+│   │   │   ├── add/page.tsx          # Add transaction page
+│   │   │   └── budget/page.tsx       # Budget management page
+│   │   ├── layout.tsx                # Root layout (navbar)
+│   │   ├── page.tsx                  # Public landing page
 │   │   └── globals.css               # Global styles
+│   │
 │   ├── components/
 │   │   ├── dashboard/
-│   │   │   └── dashboard-client.tsx  # Main dashboard component
-│   │   ├── EditExpenseForm.tsx       # Edit expense modal
-│   │   └── ui/                       # shadcn/ui components
-│   ├── actions/                      # Server actions
-│   │   ├── expense.ts                # Expense CRUD operations
-│   │   └── budget.ts                 # Budget operations
-│   ├── lib/
-│   │   ├── supabase/
-│   │   │   ├── server.ts             # Server-side Supabase client
-│   │   │   └── browser.ts            # Client-side Supabase client
-│   │   ├── currency.ts               # Currency configuration
-│   │   ├── convertCurrency.ts        # Currency conversion logic
-│   │   └── formatCurrency.ts         # Currency formatting (TK symbol)
-│   └── prisma/                       # Database schema
-│       ├── schema.prisma             # Prisma schema definition
-│       └── migrations/               # Database migrations
-├── public/                           # Static assets
+│   │   │   └── dashboard-client.tsx  # Main dashboard client component
+│   │   ├── EditExpenseForm.tsx        # Edit transaction modal
+│   │   └── ui/                        # shadcn/ui primitives
+│   │
+│   ├── actions/                       # Next.js Server Actions
+│   │   ├── expense.ts                 # Expense CRUD operations
+│   │   └── budget.ts                  # Budget get/set operations
+│   │
+│   └── lib/
+│       ├── supabase/
+│       │   ├── server.ts              # Server-side Supabase client
+│       │   └── browser.ts             # Client-side Supabase client
+│       ├── currency.ts                # Currency configuration & constants
+│       ├── convertCurrency.ts         # Currency conversion logic
+│       └── formatCurrency.ts          # Currency display formatting (৳ symbol)
+│
+├── prisma/
+│   ├── schema.prisma                  # Prisma schema definition
+│   └── migrations/                    # Database migration history
+│
+├── public/                            # Static assets
+├── .env.example                       # Environment variable template
 ├── package.json
 ├── tsconfig.json
 ├── tailwind.config.ts
@@ -158,11 +168,13 @@ spendwise/
 └── next.config.ts
 ```
 
-## 🗄️ Database Schema
+---
 
-For detailed database documentation, see [DATABASE.md](./DATABASE.md) for schema models, Prisma queries, migrations, and optimization.
+## Database Schema
 
-### Expense Model
+For complete documentation including query examples, data isolation patterns, and optimization tips, see [DATABASE.md](./DATABASE.md).
+
+### Expense
 
 ```prisma
 model Expense {
@@ -170,8 +182,8 @@ model Expense {
   userId    String   @db.Uuid
   title     String
   amount    Decimal  @db.Decimal(12, 2)
-  category  String   // Normalized to lowercase
-  type      String   // "income" or "expense"
+  category  String   // Normalized to lowercase on write
+  type      String   // "income" | "expense"
   currency  String   @default("BDT")
   recurring Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -181,12 +193,12 @@ model Expense {
 }
 ```
 
-### Budget Model
+### Budget
 
 ```prisma
 model Budget {
   id        String   @id @default(cuid())
-  userId    String   @db.Uuid @unique
+  userId    String   @db.Uuid @unique   // One budget per user
   amount    Decimal  @db.Decimal(12, 2)
   currency  String   @default("BDT")
   createdAt DateTime @default(now())
@@ -194,137 +206,178 @@ model Budget {
 }
 ```
 
-## 🔐 Authentication Flow
+**Design Notes:**
+- `userId` maps to the Supabase auth user UUID — no foreign-key join required
+- `@@index([userId])` ensures all per-user queries are fast regardless of table size
+- Category values are always lowercased before storage for consistent filtering
 
-1. **Signup**: User creates account → Email verification required
-2. **Forgot Password**: Users can request a password reset email; Supabase handles the reset flow and sends a secure reset link to the user's email.
-3. **Login**: User logs in with email/password
-4. **Session**: Server-side auth check via `createClient()` from Supabase
-5. **Logout**: Clear session and redirect to login
-6. **Protected Routes**: Dashboard routes redirect unauthenticated users to `/login`
+---
 
-## 💰 Currency Support
+## Authentication Flow
 
-- **Default**: Bengali Taka (৳) - BDT
-- **Available**: USD ($), EUR (€), GBP (£), INR (₹)
-- **Storage**: Each expense and budget stores its currency
-- **Conversion**: Client-side conversion using hardcoded exchange rates
-- **Display**: All values shown in selected display currency
+```
+Sign Up → Email Verification → Login → Dashboard (server-side session check)
+                                            ↓
+                                    Unauthenticated → Redirect to /login
+```
 
-## 📊 Dashboard Features
+| Step | Mechanism |
+|---|---|
+| Sign Up | Supabase Auth — creates user, sends verification email |
+| Email Verification | Required before first login |
+| Login | Email + password via Supabase Auth |
+| Session | Server-side validation via `createClient()` on every request |
+| Password Reset | Supabase sends a secure reset link to the user's email |
+| Logout | Clears session, redirects to `/login` |
+| Route Protection | Middleware + server-side checks on all `/dashboard/*` routes |
 
-### Current Month Stats
+---
 
-- **Balance**: Income - Expenses (current month)
-- **Income**: Sum of all income transactions (current month)
-- **Expense**: Sum of all expenses (current month)
+## Currency Support
 
-### Charts & Visualizations
+| Currency | Code | Symbol |
+|---|---|---|
+| Bangladeshi Taka *(default)* | BDT | ৳ |
+| US Dollar | USD | $ |
+| Euro | EUR | € |
+| British Pound | GBP | £ |
+| Indian Rupee | INR | ₹ |
 
-- **Pie Chart**: Category breakdown of expenses
-- **Bar Chart**: Monthly spending trends
-- **Empty States**: Professional placeholders when no data exists
+- Each transaction and budget record stores its own currency code
+- Conversion is handled client-side using hardcoded exchange rates
+- All dashboard totals are displayed in the user's selected display currency
 
-### Filters & Search
+---
 
-- Filter by transaction type (income/expense/all)
-- Filter by category
-- Search by transaction title
-- Date range picker for exports
+## Getting Started
 
-## 🔧 Server Actions
+### Prerequisites
 
-For complete API documentation with examples and error handling, see [API_DOCUMENTATION.md](./API_DOCUMENTATION.md).
+- Node.js 18 or higher
+- npm or yarn
+- A [Supabase](https://supabase.com/) project (free tier is sufficient)
 
-### Expense Actions (`src/actions/expense.ts`)
+### 1. Clone and Install
 
-- `addExpense()` - Create new expense
-- `updateExpense()` - Update existing expense
-- `deleteExpense()` - Remove expense
+```bash
+git clone https://github.com/YeaishTurj/web-development-bootcamp-may-2026-expense-tracker
+cd spendwise
+npm install
+```
 
-### Budget Actions (`src/actions/budget.ts`)
+### 2. Configure Environment Variables
 
-- `setBudget()` - Set/update monthly budget
-- `getBudget()` - Fetch user's budget
+Create a `.env.local` file in the project root. Use [`.env.example`](./.env.example) as a reference:
 
-**Data Normalization**: Categories are automatically normalized to lowercase before storage.
+```env
+# Prisma — Supabase PostgreSQL connection
+DATABASE_URL="postgresql://user:password@host:5432/database"
+DIRECT_URL="postgresql://user:password@host:6543/database"
 
-## 🎨 Design System
+# Supabase — client-side authentication
+NEXT_PUBLIC_SUPABASE_URL="https://your-project.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="your-anon-key"
+```
 
-### Responsive Breakpoints
+> Both `DATABASE_URL` and `DIRECT_URL` are required. The direct URL bypasses the Supabase connection pooler for migrations.
 
-- **Mobile**: xs (default)
-- **Tablet**: `sm:` (640px)
-- **Desktop**: `md:` (768px), `lg:` (1024px)
+### 3. Set Up the Database
 
-### Color Palette
+```bash
+# Generate the Prisma client
+npx prisma generate
 
-- Primary: Blue (#3B82F6)
-- Success: Emerald (#10B981)
-- Danger: Rose (#F43F5E)
-- Accent: Sky (#0EA5E9)
+# Push schema to your Supabase database
+npx prisma db push
+```
 
-### Components
+### 4. Start the Development Server
 
-- All UI components use shadcn/ui
-- Tailwind CSS for styling
-- Mobile-first design approach
+```bash
+npm run dev
+```
 
-## 🚀 Deployment
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server with Turbopack |
+| `npm run build` | Build optimized production bundle |
+| `npm start` | Start production server |
+| `npm run lint` | Run ESLint across the project |
+
+---
+
+## Deployment
 
 ### Vercel (Recommended)
 
-1. Push code to GitHub
-2. Connect repository to Vercel
-3. Set Root Directory to `spendwise`
-4. Configure environment variables:
-   - `DATABASE_URL`
-   - `DIRECT_URL`
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-5. Deploy
+1. Push the repository to GitHub
+2. Import the repository in [Vercel](https://vercel.com/)
+3. Set the **Root Directory** to `spendwise`
+4. Add the following environment variables in the Vercel dashboard:
 
-## 📦 Available Scripts
+| Variable | Description |
+|---|---|
+| `DATABASE_URL` | Supabase pooled connection URL |
+| `DIRECT_URL` | Supabase direct connection URL |
+| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Your Supabase anon/public key |
 
-```bash
-npm run dev       # Start development server
-npm run build     # Build for production
-npm start         # Start production server
-npm run lint      # Run ESLint
-```
+5. Click **Deploy**
 
-## 🐛 Common Issues
+---
+
+## Troubleshooting
 
 ### Database Connection Error
 
-- Verify `DATABASE_URL` and `DIRECT_URL` in `.env.local`
-- Ensure Supabase project is active
-- Run `npx prisma db push` to sync schema
+- Confirm `DATABASE_URL` and `DIRECT_URL` are correctly set in `.env.local`
+- Ensure your Supabase project is active (free tier projects pause after inactivity)
+- Re-run `npx prisma db push` if the schema is out of sync
 
-### Auth Issues
+### Authentication Issues
 
-- Check Supabase URL and anon key
-- Clear browser cookies and try login again
-- Verify email verification is complete
+- Verify `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are correct
+- Confirm the user has completed email verification before attempting login
+- Clear browser cookies and retry if the session appears stale
 
 ### Build Errors
 
-- Run `npx prisma generate` after schema changes
-- Clear `.next` folder: `rm -rf .next`
-- Rebuild: `npm run build`
+- Run `npx prisma generate` after any changes to `schema.prisma`
+- Delete the `.next` cache and rebuild:
+  ```bash
+  rm -rf .next && npm run build
+  ```
 
-## 📝 Notes
+---
 
-- **Current Month Only**: Dashboard shows only current month's statistics
-- **Category Normalization**: All categories saved in lowercase
-- **Default Currency**: BDT (Bangladeshi Taka)
-- **Mobile Responsive**: Fully optimized for mobile devices
-- **Server-Side Auth**: Auth checks happen on server for security
+## Contributing
 
-## 📄 License
+Contributions are welcome. To get started:
 
-MIT
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m "feat: add your feature"`
+4. Push to your fork: `git push origin feature/your-feature`
+5. Open a Pull Request
 
-## 🤝 Contributing
+Please open an issue first for significant changes so the approach can be discussed.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+---
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE).
+
+---
+
+<div align="center">
+
+Built with Next.js · Prisma · Supabase · Tailwind CSS
+
+</div>
