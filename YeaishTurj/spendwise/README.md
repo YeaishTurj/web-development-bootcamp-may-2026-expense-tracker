@@ -178,10 +178,11 @@ model Budget {
 ## 🔐 Authentication Flow
 
 1. **Signup**: User creates account → Email verification required
-2. **Login**: User logs in with email/password
-3. **Session**: Server-side auth check via `createClient()` from Supabase
-4. **Logout**: Clear session and redirect to login
-5. **Protected Routes**: Dashboard routes redirect unauthenticated users to `/login`
+2. **Forgot Password**: Users can request a password reset email; Supabase handles the reset flow and sends a secure reset link to the user's email.
+3. **Login**: User logs in with email/password
+4. **Session**: Server-side auth check via `createClient()` from Supabase
+5. **Logout**: Clear session and redirect to login
+6. **Protected Routes**: Dashboard routes redirect unauthenticated users to `/login`
 
 ## 💰 Currency Support
 
